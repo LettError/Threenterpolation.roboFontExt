@@ -1,4 +1,4 @@
-description: RF extension: small interactive tool that does a Barycentric interpolation of 3 master glyphs.
+description: "RoboFont extension, a small interactive tool that does a Barycentric interpolation of 3 master glyphs."
 developer: LettError
 developerURL: http://letterror.com
 extensionName: Threenterpolation
