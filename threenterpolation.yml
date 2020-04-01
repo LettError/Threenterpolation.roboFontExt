@@ -1,9 +1,10 @@
-description: A RoboFont extension that makes switching glyph, space or font windows super easy.
+description: RF extension: small interactive tool that does a Barycentric interpolation of 3 master glyphs.
 developer: LettError
 developerURL: http://letterror.com
-extensionName: EditThatNextMaster
-extensionPath: EditThatNextMaster.roboFontExt
-repository: https://github.com/LettError/editThatNextMasterRoboFontExtension
+extensionName: Threenterpolation
+extensionPath: Threenterpolation.roboFontExt
+repository: https://github.com/LettError/Threenterpolation.roboFontExt
 tags: [ interface, editing, switching, masters, designspace ]
-dateAdded: 2018-12-17 21:00:00
-icon: https://raw.githubusercontent.com/LettError/editThatNextMasterRoboFontExtension/master/EditThatNextMasterIcon.png
+dateAdded: 2020-04-01 21:00:00
+icon: https://raw.githubusercontent.com/LettError/Threenterpolation.roboFontExt/master/threenterpolationIcon.png
+
