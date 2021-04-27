@@ -37,6 +37,7 @@ class Threenterpolation(object):
         self.mGlyphs = None
         self.startDrag = None
         self.p1 = self.p2 = self.p3 = None
+        self._factors = None
         s = 400
         self.w = vanilla.Window((s,s), "3nterpolation",minSize=(250,250))
         self.w.c = CanvasGroup((0,0,0,0), delegate=self)
@@ -76,19 +77,34 @@ class Threenterpolation(object):
         items = []
         if self.snapped is not None:
             items.append(dict(title="Set Master", callback=self.menu_setMaster))
-        items.append(dict(title="Copy Result", callback=self.menu_copyResult))
+        if self.result is not None:
+            items.append(dict(title="Copy the result as glyph…", callback=self.menu_copyResult))
+            #items.append(dict(title="Make a new font like this…", callback=self.menu_makeFont))
         vanilla.vanillaList.VanillaMenuBuilder(self, items, m)
         return m
     
-    def menu_setMaster(self, sender):
-        # set the master for this glyph
+    def _getMasters(self):
         keys = []
         fonts = []
+        masters = []
         for f in AllFonts():
+            masters.append(f)
             for g in f.keys():
                 fonts.append((f"{g} ({f.info.familyName} {f.info.styleName})", f, g))
         fonts.sort(key=lambda x: x[0])
         keys = [a for a, b, c in fonts]
+        return keys, fonts, masters
+        
+    def menu_setMaster(self, sender):
+        # set the master for this glyph
+        keys, fonts, _ = self._getMasters()
+        # keys = []
+        # fonts = []
+        # for f in AllFonts():
+        #     for g in f.keys():
+        #         fonts.append((f"{g} ({f.info.familyName} {f.info.styleName})", f, g))
+        # fonts.sort(key=lambda x: x[0])
+        # keys = [a for a, b, c in fonts]
         selection = SearchList(keys)
         index = keys.index(selection)
         _, f, name = fonts[index]
@@ -241,6 +257,7 @@ class Threenterpolation(object):
             ctx.oval(self.pointer[0]-.5*d, self.pointer[1]-.5*d, d, d)
 
             f1, f2, f3 = ip(p1, p2, p3, self.pointer)
+            self._factors = f1, f2, f3
             r = None
             if self.mGlyphs is not None:
                 if None not in self.mGlyphs:
@@ -264,5 +281,14 @@ class Threenterpolation(object):
                         ctx.restore()
             ctx.restore()
         ctx.restore()
+    
+    def menu_makeFont(self, sender=None):
+        # note: we can only make a whole new font if the masters are 3 separate ufos.
+        print("making a font?", self._factors)
+        _, _, masters = self._getMasters()
+        print('masters', masters)
+        new = RFont(showInterface=True)
+        #self.result = r = f1*self.mGlyphs[0] + f2*self.mGlyphs[1] + f3*self.mGlyphs[2]
+        
 
 t = Threenterpolation()

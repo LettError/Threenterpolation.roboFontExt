@@ -1,0 +1,10 @@
+description: "RoboFont extension, a small interactive tool that does a Barycentric interpolation of 3 master glyphs."
+developer: LettError
+developerURL: http://letterror.com
+extensionName: Threenterpolation
+extensionPath: Threenterpolation.roboFontExt
+repository: https://github.com/LettError/Threenterpolation.roboFontExt
+tags: [ interface, masters, designspace ]
+dateAdded: 2020-04-01 21:00:00
+icon: https://raw.githubusercontent.com/LettError/Threenterpolation.roboFontExt/master/threenterpolationIcon.png
+
